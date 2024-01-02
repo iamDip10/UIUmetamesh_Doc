@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Unit Testing - UIU metamesh</title>
+        <title>User Guide - UIU metamesh</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -33,14 +33,14 @@
                             <li class="navitem">
                                 <a href=".." class="nav-link">Home</a>
                             </li>
-                            <li class="navitem">
-                                <a href="../userguide/" class="nav-link">User Guide</a>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">User Guide</a>
                             </li>
                             <li class="navitem">
                                 <a href="../coding_document/" class="nav-link">Coding Document</a>
                             </li>
-                            <li class="navitem active">
-                                <a href="./" class="nav-link">Unit Testing</a>
+                            <li class="navitem">
+                                <a href="../unit_testing/" class="nav-link">Unit Testing</a>
                             </li>
                         </ul>
 
@@ -51,12 +51,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../coding_document/" class="nav-link">
+                                <a rel="prev" href=".." class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../coding_document/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -78,24 +78,38 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#our-testcases" class="nav-link">Our Testcases</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#authentication-system-by-011201145" class="nav-link">Authentication System by 011201145</a>
+            <li class="nav-item" data-level="2"><a href="#how-to-run-uiu-metamesh" class="nav-link">How to run UIU-METAMESH</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#chat-system-by-011201171" class="nav-link">Chat System by 011201171</a>
+            
+            <li class="nav-item" data-level="2"><a href="#how-to-create-a-account" class="nav-link">How to create a account</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#creating-club-by-011201195" class="nav-link">Creating Club by 011201195</a>
+            
+            <li class="nav-item" data-level="2"><a href="#how-to-post" class="nav-link">How to Post</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#post-upvoting-and-commenting-by-011201148" class="nav-link">Post Upvoting and Commenting by 011201148</a>
+            
+            <li class="nav-item" data-level="2"><a href="#how-to-initiate-chat" class="nav-link">How to Initiate Chat</a>
               <ul class="nav flex-column">
               </ul>
             </li>
+            
+            <li class="nav-item" data-level="2"><a href="#how-to-see-notice" class="nav-link">How to see Notice</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#how-to-openjoin-a-club" class="nav-link">How to open/join a club</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#how-to-search-job" class="nav-link">How to Search Job</a>
+              <ul class="nav flex-column">
               </ul>
             </li>
         </ul>
@@ -103,56 +117,82 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="our-testcases">Our Testcases</h1>
-<p>We have serveral features that need to be tested with  positive and negative scenarios, edge cases, and any specific requirements. Our selected features:</p>
+<h2 id="how-to-run-uiu-metamesh">How to run UIU-METAMESH</h2>
+<p>To run our software you have to install our software in your system. To do that follow the steps accordingly:</p>
 <ol>
-<li>Authentication System</li>
-<li>Chat System</li>
-<li>Creating Club</li>
-<li>Post Upvoting and Commenting</li>
+<li>Install the latest Python.</li>
+<li>Install MySQL database.</li>
+<li>Open a new terminal and type <code>pip install -r requ.txt</code> to install all dependencis.</li>
+<li>Then type <code>python manage.py makemigrations</code> and <code>python manage.py migrate</code>.</li>
+<li>Then type <code>python manage.py runserver</code> to open the server and ready to go.</li>
 </ol>
-<h2 id="authentication-system-by-011201145">Authentication System by 011201145</h2>
-<p>Authentication system is used to giving the permission to access his/her information. We need to ensure that the verification system must work well. </p>
-<p><strong>User Registration</strong></p>
-<p>A user must have a university mail for creating an account. If other institutes user try to create an account then it will not be accepted. 
-<img alt="Screenshot" src="../img/1.png" />
-If a user gives the right domain then he/she will be able to do the reigstration. For validating an email will be sent on that particular email of the user. After confirming it the registration will be completed.
-<img alt="Screenshot" src="../img/2.png" />
-Here every filed must be filled up otherwise it will give a warning.
-<img alt="Screenshot" src="../img/7.png" />
-In the authentication system if a user keep the domain similar to varsity domain and give any value before <strong>@</strong> then it does not show any warning and the auto-fill boxes failed to fill with correct information
-<img alt="Screenshot" src="../img/8.png" /></p>
-<p><strong>User Login</strong></p>
-<p>Here user have to use <strong>Email</strong> and <strong>Passowrd</strong> for successful validation. If a user gives wrong credentials then it will back to the <strong>Login page</strong>. </p>
-<p><img alt="Screenshot" src="../img/9.png" /></p>
-<p><strong>Result</strong></p>
-<p><strong>Login System</strong> is working as expected. <strong>Registration System</strong> is also working properly but there occur a fault when any dummy email with correct domain is given to the system. </p>
-<h2 id="chat-system-by-011201171">Chat System by 011201171</h2>
-<p>Here a user can chat with other users from the user lists. Here everyone can send other messages. We need to ensure a perfect chat system for the user. </p>
-<p>A user must have to select the other whom he/she want to send message. 
-<img alt="Screenshot" src="../img/10.png" />
-After sending a message from one side the another will get the message and can start the conversation. We have tested the chat system with messageing between two users. There we dont find any error.
-<img alt="Screenshot" src="../img/11.png" />
-<img alt="Screenshot" src="../img/12.png" /></p>
-<p>In case if a user click on send button without writting anything in message box then it sends the null value to user.
-<img alt="Screenshot" src="../img/13.png" /></p>
-<p><strong>Result</strong></p>
-<p><strong>Chat system</strong> is working properly but it can not handle the blank message box.</p>
-<h2 id="creating-club-by-011201195">Creating Club by 011201195</h2>
-<p>Creating club is unique feature of our system. We need to ensure that the any club is perfectly created and managed.</p>
-<p>The create club form is working well with all types of testcases. Here if the admin email is not in database then an error occured. 
-<img alt="Screenshot" src="../img/14.png" /></p>
-<p>The club access is tested with many ways. It has no issues. If a user request to join in a club then <strong>Pending</strong> state appeared and after that if the admin accept it he/she can enter otherwise rejected.
-<img alt="Screentshot" src="../img/15.png" />
-<img alt="Screenshot" src="../img/16.png" /></p>
-<p><strong>Result</strong> </p>
-<p>The club management system is working fine but if the admin email is not in database it fails to create a club.</p>
-<h2 id="post-upvoting-and-commenting-by-011201148">Post Upvoting and Commenting by 011201148</h2>
-<p>Sharing the thoughts to the community is the main concern of the system here we need to make a proper upvote system as well as comment system for better reach. </p>
-<p>A user can upvote and comment anything regarding a post. We have test the upvote button by clicking multiple time from one user but it is not increased and passed the test. But if the comment is done with blank box then it does not give any warning.</p>
-<p><img alt="Screenshot" src="../img/17.png" /></p>
-<p><strong>Result</strong>
-The upvoting and comment system is working as expected. </p></div>
+<h2 id="how-to-create-a-account">How to create a account</h2>
+<p>For registering in our system,</p>
+<ol>
+<li>Click the <strong>signup</strong> button to create an account and fill the following fields. Enter your UIU Email Address to be an Authorized user.
+<img alt="Screenshot" src="../img/18.png" /></li>
+<li>Once you have completed the signup process you will be redirected to the Landing page. </li>
+<li>Now enter your Email and Password to Log-In.
+<img alt="Screenshot" src="../img/19.png" /></li>
+</ol>
+<p>After login, you will be on the Homepage of our system. Here we have our features like:</p>
+<ol>
+<li>Profile Information: Users can see their information from the top left of the home page.</li>
+<li>Chat: The user can initiate chat by clicking on the chat icon.</li>
+<li>Notification: on the left bottom user can see the reaction notification.</li>
+<li>Notice: The user can see the real-time notice after clicking on the notice icon.</li>
+<li>Jobs: Available jobs news will appear here.</li>
+<li>Active User: on the right side, the user can see the active user. </li>
+<li>Profile: The user can go to the profile settings by clicking on the profile icon (user image) in the top right corner.</li>
+<li>Logout: The user can logout by clicking on the logout button.</li>
+</ol>
+<p><img alt="Screenshot" src="../img/20.png" /></p>
+<h2 id="how-to-post">How to Post</h2>
+<p>To publish a post,</p>
+<ol>
+<li>On the home page users can post by clicking the post (share your thoughts) option. Users can also categorize their posts accordingly by clicking the filter by category button and the dropdown will appear to choose from.</li>
+<li>Users can react by clicking on the upvote button and share their thoughts by clicking on the Enter a comment field.</li>
+</ol>
+<p><img alt="Screenshot" src="../img/21.png" /></p>
+<h2 id="how-to-initiate-chat">How to Initiate Chat</h2>
+<ol>
+<li>Click on the chat icon from the top middle section it will redirect to the real-time chat page.</li>
+<li>On the left side, there is an active user list.</li>
+<li>Click on the user to whom you want to start a conversation.</li>
+<li>After clicking on the user icon, the chat window will open on the right side.</li>
+<li>Now write your message in the enter message section and click the send button to send the message.</li>
+<li>Now you can see your message and reply from the other end user above.</li>
+</ol>
+<p><img alt="Screenshot" src="../img/22.png" /></p>
+<h2 id="how-to-see-notice">How to see Notice</h2>
+<ol>
+<li>Click on the notice icon, it will redirect you to the notice page where you can see the real-time notices from UIU. </li>
+<li>Click on the notice to learn more about the specific notice. It will redirect to the UIU website notice panel.</li>
+</ol>
+<p><img alt="Screenshot" src="../img/23.png" /></p>
+<h2 id="how-to-openjoin-a-club">How to open/join a club</h2>
+<ol>
+<li>Click on the club icon, it will redirect you to the club page. </li>
+<li>To create a new club click on the create club button and provide the information.
+<strong>Note:</strong> 
+If you want to the admin check the admin box.
+If you want to make another user admin click on the email box and provide that user email. </li>
+<li>Now click on the create club button now your club is created. And you are redirected to the club page. </li>
+<li>Now click the Enter button to enter the club.</li>
+<li>Here you can post and create events. </li>
+<li>To post here follow the how-to post steps.</li>
+<li>To create an event click on the create new event button and provide the information and click on the create event button your event is created. </li>
+<li>Click on the view details button to view the details of the event. </li>
+<li>If you are the admin you can allow or reject members on the right side of the club page of the individual clubs.</li>
+<li>Click on the member under the Pending request section now you can approve or reject the user request to join the club. </li>
+</ol>
+<h2 id="how-to-search-job">How to Search Job</h2>
+<ol>
+<li>To see the latest job news click on the Jobs. Now you will be redirected to the jobs page.</li>
+<li>Here you can see the latest jobs. </li>
+<li>Click on the job to learn more about a specific job. </li>
+</ol>
+<p><img alt="Screenshot" src="../img/24.png" /></p></div>
             </div>
         </div>
 
