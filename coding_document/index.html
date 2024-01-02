@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Coding Document - UIU metamesh</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">UIU metamesh</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Coding Document</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#about-the-part" class="nav-link">About the part</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#authenticated-system-by-011201145" class="nav-link">Authenticated System by 011201145</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#creating-and-publishing-posts-by-011201148" class="nav-link">Creating and Publishing Posts by 011201148</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#post-categorization-by-011201171" class="nav-link">Post Categorization by 011201171</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#notification-system-by-011201145" class="nav-link">Notification System by 011201145</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#real-time-chat-system-by-011201171" class="nav-link">Real-time Chat System by 011201171</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#university-notice-panel-by-011203010" class="nav-link">University Notice Panel by 011203010</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#club-management-by-011201195" class="nav-link">Club Management by 011201195</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#club-dashboard-by-011201195-and-011201148" class="nav-link">Club Dashboard by 011201195 and 011201148</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#job-searching-by-011201145" class="nav-link">Job Searching by 011201145</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#user-profile-by-011203010" class="nav-link">User Profile by 011203010</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="about-the-part">About the part</h1>
+<p>It is a document of how we develop the system's core functionality. Here we will try to describe each implementation with proper codebase. </p>
+<h2 id="authenticated-system-by-011201145">Authenticated System by 011201145</h2>
+<p>When a user enters our system then he/she must be a valid user. For validating, a user have to register our system. Our register system has <strong>ID Verification</strong> system to authenticate the right user. After authenticating, the user must have to login to our system by his/her user id and password.</p>
+<p><strong>Backend of Validation and Session</strong></p>
+<p>The Django view functions, "validate_user" and "logout," handle user authentication and logout functionality, respectively. 
+In "validate_user" upon receiving a POST request with user credentials, the function retrieves the corresponding student object from the database. If the object exists and the entered password matches, it sets the user's status to active, saves the changes, and creates a session to validate the user. It then redirects the user to the dashboard page.</p>
+<pre><code>def validate_user (req) :
+    if req.method == &quot;POST&quot;:
+        __id = req.POST['email']
+        __pass = req.POST['pass']
+
+        objj = students.objects.get(stu_id = __id) 
+        print(objj)
+        if (objj and objj.password == __pass):
+            objj.active = &quot;true&quot;
+            objj.save()
+            req.session['validate'] = objj.stu_id
+            encrp = signing.dumps(objj.stu_id, key=key)
+            return redirect('dashb', user=encrp)
+
+        return render(req, &quot;index.html&quot;)
+</code></pre>
+<p>On the other hand, "logout" checks if a user is currently validated in the session. If so, it deactivates the user, saves the changes, and flushes the session, effectively logging the user out. The function then redirects the user to the login page.</p>
+<pre><code>def logout(req, user):
+    if 'validate' in req.session:
+        obj = students.objects.get(stu_id = user)
+        obj.active = 'false'
+        obj.save()
+        req.session.flush()
+
+    return redirect('login')
+</code></pre>
+<p><strong>AJAX Implementation</strong></p>
+<pre><code>&lt;script&gt;
+    function __validity() {
+        let text__ = document.getElementById('email').value;
+        let batch = document.getElementById('batch');
+        let dpet = document.getElementById('dept');
+        let btn = document.getElementById('sub');
+        let loading = document.getElementById('loading');
+
+        dpet.value = &quot;&quot;;
+        batch.value = &quot;&quot;;
+        document.getElementById('email').style.borderColor = &quot;&quot;;
+
+        if (!text__.includes('@bscse.uiu.ac.bd') &amp;&amp; !text__.includes('@bseee.uiu.ac.bd')) {
+            document.getElementById('email').style.borderColor = &quot;red&quot;;
+            btn.disabled = true;
+        } else {
+
+            loading.style.display = &quot;block&quot;;
+
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'validate_email.php?email=' + text__, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) {
+
+                    loading.style.display = &quot;none&quot;;
+
+                    let response = JSON.parse(xhr.responseText);
+                    if (response.valid) {
+                        btn.disabled = false;
+                        document.getElementById('email').style.borderColor = &quot;green&quot;;
+
+                        let val = text__.split(&quot;@&quot;);
+                        batch.value = &quot;011&quot; + val[0].match(/[0-9]/g).join('');
+
+                        if (text__.includes('@bscse.uiu.ac.bd')) {
+                            dpet.value = &quot;Computer Science and Engineering&quot;;
+                        } else if (text__.includes('@bseee.uiu.ac.bd')) {
+                            dpet.value = &quot;Electrical and Electronics Engineering&quot;;
+                        }
+                    } else {
+                        document.getElementById('email').style.borderColor = &quot;red&quot;;
+                        btn.disabled = true;
+                    }
+                }
+            };
+
+            xhr.send();
+        }
+    }
+&lt;/script&gt;
+</code></pre>
+<h2 id="creating-and-publishing-posts-by-011201148">Creating and Publishing Posts by 011201148</h2>
+<p>Here a user can create and publish a post to the community to get help. Here a user can select a category so that others can easily filter out a particular post. The categories are: <strong>Help</strong>, <strong>Job</strong>, <strong>Seeking</strong>, <strong>Urgent</strong>, <strong>Club</strong>. </p>
+<p><strong>Frontend</strong></p>
+<p>The provided HTML code represents a form for creating posts on a web page. It is designed as a modal, with a button likely triggering its display. The form includes a textarea for the post content and a dropdown menu for selecting the post category (e.g., Urgent, Help, Club, Job, Seeking Post). There is also a "Publish" button to submit the post. The modal has a distinct style, positioned on the right side of the page, initially hidden and revealed when needed. Overall, it provides a user-friendly interface for users to compose and categorize posts.</p>
+<pre><code>&lt;div class=&quot;w-1/3 absolute h-2/3 bg-gray-100 mt-28 shadow-2xl rounded-2xl flex flex-col&quot; id=&quot;post&quot; style=&quot;margin-left:75vh; display:none;&quot;&gt;
+            &lt;div class=&quot;w-full h-20 flex justify-center items-center text-xl font-bold&quot;&gt;
+                &lt;h1&gt;Create Post&lt;/h1&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;w-full flex flex-col items-center mt-1 &quot;&gt;
+                &lt;form action=&quot;{% url 'postit' user=enp %}&quot; method=&quot;POST&quot; class=&quot;flex flex-col&quot;&gt;
+                    {% csrf_token %}
+                    &lt;textarea name=&quot;post&quot; class=&quot;rounded-2xl px-10 py-7 text-md&quot; id=&quot;&quot; cols=&quot;50&quot; rows=&quot;15&quot; style=&quot;resize:none&quot;&gt;&lt;/textarea&gt;
+                    &lt;div class=&quot;w-full flex justify-between mt-3&quot;&gt;
+                        &lt;select name=&quot;cat&quot; id=&quot;&quot; class=&quot;w-1/3 flex items-center text-center rounded-2xl&quot;&gt;
+                            &lt;option value=&quot;urgent&quot;&gt;Urgent&lt;/option&gt;
+                            &lt;option value=&quot;help&quot;&gt;Help&lt;/option&gt;
+                            &lt;option value=&quot;club&quot;&gt;Club&lt;/option&gt;
+                            &lt;option value=&quot;job&quot;&gt;Job&lt;/option&gt;
+                            &lt;option value=&quot;seek&quot;&gt;Seeking Post&lt;/option&gt;
+
+
+                        &lt;/select&gt;
+                        &lt;input type=&quot;submit&quot; name=&quot;sub&quot; id=&quot;&quot; value=&quot;Publish&quot; class=&quot;w-24 rounded-2xl bg-orange-400 h-12 bg-black&quot;&gt;
+                    &lt;/div&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+</code></pre>
+<p><strong>Backend</strong></p>
+<p>The <code>postText</code> function handles the posting of text content on a platform, likely a social media or discussion forum. It first checks if the user session has a 'validate' key. If validated, it decrypts the user ID, retrieves the corresponding student object, and processes a POST request. The function extracts the posted text, category, and generates a unique ID based on the student ID and current timestamp. A new post object is then created and saved to the database. Finally, the function redirects the user to a dashboard view if validated; otherwise, it redirects to the login page.</p>
+<pre><code>def postText(req, user):
+    if 'validate' in req.session:
+        encrp = signing.loads(user, key=key)
+
+        _obj = students.objects.get(stu_id = encrp)
+
+        if req.method == &quot;POST&quot;:
+            text = req.POST['post']
+            stu = _obj
+            cat = req.POST['cat']
+            idd = _obj.stu_id + &quot;-&quot; + datetime.now().strftime(&quot;%d-%m-%Y-%H-%M-%S&quot;)
+
+            object = posts(text = text, student = stu, category = cat, iid = idd)
+
+            object.save()
+
+        return redirect('dashb', user=user)
+    else:
+        return redirect('login')
+</code></pre>
+<p>Moreover a user can upvote and comment on particular posts. </p>
+<p><strong>Frontend</strong></p>
+<pre><code>&lt;div class=&quot;w-full h-10 flex mb-5 justify-center items-center&quot;&gt;
+                            &lt;div class=&quot;w-1/2 h-full flex&quot;&gt;
+                                &lt;button id=&quot;{{posts.iid}}&quot; data-user=&quot;{{user.stu_id}}&quot; data-post=&quot;{{posts.iid}}&quot; data-csrf='{% csrf_token %}' class=&quot;vote w-full h-full flex items-center justify-center rounded-2xl hover:text-orange-500 hover:font-bold&quot; data-enp=&quot;{{enp}}&quot;&gt;
+                                    &lt;svg class=&quot;w-6 h-6 text-gray-800 dark:text-white&quot; aria-hidden=&quot;true&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; fill=&quot;none&quot; viewBox=&quot;0 0 20 20&quot;&gt;
+                                        &lt;path stroke=&quot;currentColor&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;0.9&quot; d=&quot;M4.008 8.714c1-.097 1.96-.45 2.792-1.028a25.112 25.112 0 0 0 4.454-5.72 1.8 1.8 0 0 1 .654-.706 1.742 1.742 0 0 1 1.65-.098 1.82 1.82 0 0 1 .97 1.128c.075.248.097.51.065.767l-1.562 4.629M4.008 8.714H1v9.257c0 .273.106.535.294.728a.99.99 0 0 0 .709.301h1.002a.99.99 0 0 0 .71-.301c.187-.193.293-.455.293-.728V8.714Zm8.02-1.028h4.968c.322 0 .64.08.925.232.286.153.531.374.716.645a2.108 2.108 0 0 1 .242 1.883l-2.36 7.2c-.288.813-.48 1.354-1.884 1.354-2.59 0-5.39-1.06-7.504-1.66&quot;/&gt;
+                                    &lt;/svg&gt;
+                                    &lt;h3 class=&quot;ml-2&quot;&gt;Upvote&lt;/h3&gt;
+                                &lt;/button&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;w-1/2 h-full flex items-center justify-center&quot;&gt;
+
+                                &lt;input type=&quot;text&quot; name=&quot;comnt&quot; id=&quot;{{posts.iid}}&quot; placeholder=&quot;Enter a comment&quot; class=&quot;koment ml-8 rounded-2xl&quot;&gt;
+                                &lt;button class=&quot;cmnt w-full h-full flex justify-center items-center hover:text-orange-500&quot; data-csrrf='{% csrf_token %}' data-postid=&quot;{{posts.iid}}&quot; data-enp=&quot;{{enp}}&quot; data-user=&quot;{{user.stu_id}}&quot; &gt;
+                                    Comment
+                                &lt;/button&gt; 
+
+                            &lt;/div&gt;
+
+
+                        &lt;/div&gt;
+</code></pre>
+<p><strong>Backend for Upvoting</strong></p>
+<p>The provided Django view function, "likeit" handles the upvoting mechanism for posts on a web platform. Upon receiving a POST request, the function extracts the relevant information, including the user and post IDs. It increments the upvote count of the corresponding post and saves the updated information. Additionally, it checks whether the user has previously upvoted the post. If yes, it updates the existing like entry; otherwise, it creates a new like entry in the database. Finally, the function generates a notification message indicating the user's upvote action and saves it in the notifications database. The function then redirects the user to the dashboard page. Same goes for <strong>Commenting</strong> backend.</p>
+<pre><code>def likeit(req):
+    if 'validate' in req.session:
+        if req.method == 'POST':
+            print(req.POST.get('post_id'))
+            user = students.objects.get(stu_id = req.POST.get('user'))
+            post_obj = posts.objects.get(iid = req.POST.get('post_id'))
+            post_obj.upvote = int(post_obj.upvote) + 1 
+            post_obj.save()
+            if likes.objects.filter(post=post_obj, user=user).exists():
+                likeobj = likes.objects.get(post=post_obj, user=user)
+                likeobj.counter = post_obj.upvote
+                likeobj.save()
+            else:
+                like = likes(counter = post_obj.upvote, post = post_obj, user = students.objects.get(stu_id = req.POST.get('user')))
+                like.save()
+
+            message = user.firstName + &quot; &quot; + user.lastName + &quot; has upvoted your post.&quot;
+            notificat = notification(message = message, to=post_obj.student)
+            notificat.save()
+
+        print(&quot;Hello&quot; + post_obj)
+        return redirect('dashb', user=req.POST.get('enpp'))
+    else:
+        return redirect('login')
+</code></pre>
+<p><strong>Backend for Commenting</strong></p>
+<pre><code>def comment(req, user):
+    der = signing.loads(user, key=key)
+    obj = students.objects.get(stu_id = der) 
+    comnt = req.POST.get('cmnt') 
+    postid = req.POST.get('postid')
+    pst = posts.objects.get(iid = postid)
+    if likes.objects.filter(post=pst, user=obj).exists():
+        print(comnt)
+        likeobj = likes.objects.get(post=pst, user=obj)
+        likeobj.comment = comnt
+        likeobj.save()
+    else:
+        cmntobj = likes(post=pst, user=obj, comment=comnt)
+        cmntobj.save()
+
+    msg = obj.firstName + &quot; &quot; + obj.lastName + &quot; has commented on your posts.&quot;
+    notiobj = notification(message=msg, to=pst.student)
+    notiobj.save()
+    return HttpResponse(status=204)
+</code></pre>
+<p><strong>AJAX Implementation</strong></p>
+<pre><code>//Upvote
+$(document).ready(function() {
+            $('.cmnt').on('click', function() {
+                let postid = $(this).data('postid') ;
+                let enpp = $(this).data(&quot;enp&quot;);
+                let user = $(this).data(&quot;user&quot;) ;
+                let commentt = $(this).siblings('.koment').val() ;
+                let cssrf = $('[name=csrfmiddlewaretoken]').val();
+                $(this).siblings('.koment').val(&quot;&quot;) ;
+                console.log(commentt);
+                $.ajax({
+                    type: &quot;POST&quot; ,
+                    url: &quot;{% url 'commentit' user=enp %}&quot;,
+                    data:{
+                        csrfmiddlewaretoken: cssrf,
+                        postid:postid,
+                        cmnt: commentt,
+                    },
+                    success: function() {
+                        console.log(commentt) ;
+                    }
+                });
+            });
+        });
+</code></pre>
+<pre><code>//Comment
+$(document).ready(function() {
+            $('.cmnt').on('click', function() {
+                let postid = $(this).data('postid') ;
+                let enpp = $(this).data(&quot;enp&quot;);
+                let user = $(this).data(&quot;user&quot;) ;
+                let commentt = $(this).siblings('.koment').val() ;
+                let cssrf = $('[name=csrfmiddlewaretoken]').val();
+                $(this).siblings('.koment').val(&quot;&quot;) ;
+                console.log(commentt);
+                $.ajax({
+                    type: &quot;POST&quot; ,
+                    url: &quot;{% url 'commentit' user=enp %}&quot;,
+                    data:{
+                        csrfmiddlewaretoken: cssrf,
+                        postid:postid,
+                        cmnt: commentt,
+                    },
+                    success: function() {
+                        console.log(commentt) ;
+                    }
+                });
+            });
+        });
+</code></pre>
+<h2 id="post-categorization-by-011201171">Post Categorization by 011201171</h2>
+<p>Here a user can filter out specific categorized posts in thier feed. A user just need to select the category and the feed will than show the result of specific categorized posts with real time manner. </p>
+<p><strong>AJAX Implementation</strong></p>
+<p>The provided AJAX snippet listens for changes in the element with the ID "change." When a change occurs, it retrieves the selected value from this element. Subsequently, it initiates an AJAX request to the server using the URL specified in the 'url' attribute. The data parameter includes the selected value ('cat') as part of the request.
+Upon successful completion of the AJAX request, the function specified in the 'success' attribute is executed. In this case, it takes the received data and updates the HTML content of the element with the ID "postt" using the <code>$("#postt").html(data)</code> statement. This code snippet is likely part of a feature that dynamically updates content on a webpage based on user interactions.</p>
+<pre><code>$(&quot;#change&quot;).change(function() {
+            var val = $(this).val() ;
+
+            $.ajax({
+                url: &quot;{% url 'categorize' user=enp %}&quot;,
+                data: {
+                    'cat':val,
+                },
+                success: function(data){
+                    $(&quot;#postt&quot;).html(data) ;
+                }
+            });
+        }) ;
+</code></pre>
+<p>There is a seperate <strong>.html</strong> template for categorization. This file will be passed on <code>$("#postt").html(data)</code> as data and show the responeses.</p>
+<pre><code>{% for posts in post %}
+&lt;div
+  class=&quot;w-full h-fit flex flex-col rounded-2xl bg-orange-100 px-8 mt-6 mb-5&quot;
+&gt;
+  &lt;div class=&quot;w-full h-20 flex items-center&quot;&gt;
+    &lt;img src=&quot;&quot; alt=&quot;&quot; class=&quot;w-12 h-12 rounded-full bg-black&quot; /&gt;
+    &lt;div class=&quot;w-2/3 h-fit flex flex-col&quot;&gt;
+      &lt;h3 class=&quot;ml-2 text-md font-bold&quot;&gt;
+        {{posts.student.firstName|add:&quot; &quot;|add:posts.student.lastName}}
+      &lt;/h3&gt;
+      &lt;div class=&quot;ml-2 w-full h-fit flex items-center&quot;&gt;
+        &lt;h3 class=&quot;&quot;&gt;{{posts.student.stu_id}}&lt;/h3&gt;
+        &lt;div
+          class=&quot;ml-2 w-20 h-fit bg-orange-400 rounded-2xl flex justify-center text-white&quot;
+        &gt;
+          &lt;p class=&quot;font-bold&quot;&gt;{{posts.category}}&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;w-full h-fit mt-2 mb-6&quot;&gt;
+    &lt;p&gt;{{posts.text}}&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;w-full h-10 flex mb-5 justify-center items-center&quot;&gt;
+    &lt;div class=&quot;w-1/2 h-full flex&quot;&gt;
+      &lt;button
+        id=&quot;{{posts.iid}}&quot;
+        data-user=&quot;{{user.stu_id}}&quot;
+        data-post=&quot;{{posts.iid}}&quot;
+        data-csrf='{% csrf_token %}'
+        class=&quot;vote w-full h-full flex items-center justify-center rounded-2xl hover:text-orange-500 hover:font-bold&quot;
+        data-enp=&quot;{{enp}}&quot;
+      &gt;
+        &lt;svg
+          class=&quot;w-6 h-6 text-gray-800 dark:text-white&quot;
+          aria-hidden=&quot;true&quot;
+          xmlns=&quot;http://www.w3.org/2000/svg&quot;
+          fill=&quot;none&quot;
+          viewBox=&quot;0 0 20 20&quot;
+        &gt;
+          &lt;path
+            stroke=&quot;currentColor&quot;
+            stroke-linecap=&quot;round&quot;
+            stroke-linejoin=&quot;round&quot;
+            stroke-width=&quot;0.9&quot;
+            d=&quot;M4.008 8.714c1-.097 1.96-.45 2.792-1.028a25.112 25.112 0 0 0 4.454-5.72 1.8 1.8 0 0 1 .654-.706 1.742 1.742 0 0 1 1.65-.098 1.82 1.82 0 0 1 .97 1.128c.075.248.097.51.065.767l-1.562 4.629M4.008 8.714H1v9.257c0 .273.106.535.294.728a.99.99 0 0 0 .709.301h1.002a.99.99 0 0 0 .71-.301c.187-.193.293-.455.293-.728V8.714Zm8.02-1.028h4.968c.322 0 .64.08.925.232.286.153.531.374.716.645a2.108 2.108 0 0 1 .242 1.883l-2.36 7.2c-.288.813-.48 1.354-1.884 1.354-2.59 0-5.39-1.06-7.504-1.66&quot;
+          /&gt;
+        &lt;/svg&gt;
+        &lt;h3 class=&quot;ml-2&quot;&gt;Upvote&lt;/h3&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;w-1/2 h-full flex&quot;&gt;
+      &lt;form
+        class=&quot;w-full h-full flex items-center justify-center&quot;
+        method=&quot;post&quot;
+        action=&quot;&quot;
+      &gt;
+        {% csrf_token %}
+        &lt;input
+          type=&quot;text&quot;
+          name=&quot;comnt&quot;
+          id=&quot;&quot;
+          data-csrrf='{% csrf_token %}'
+          data-postid=&quot;{{posts.iid}}&quot;
+          data-enp=&quot;{{enp}}&quot;
+          data-user=&quot;{{user.stu_id}}&quot;
+          placeholder=&quot;Enter a comment&quot;
+          class=&quot;comnt ml-8 rounded-2xl&quot;
+        /&gt;
+        &lt;button
+          class=&quot;w-full h-full flex justify-center items-center hover:text-orange-500&quot;
+        &gt;
+          Comment
+        &lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+{% endfor %}
+
+</code></pre>
+<p>In <strong>Backend</strong>, the provided Django view function, "categorize" handles a request by extracting the user information from the session, retrieving the corresponding student object from the database, and filtering posts based on a specified category received through the request's GET parameters. The filtered posts are then passed to the 'categorize.html' template along with user and student information. This view is likely part of a system that dynamically categorizes and displays posts based on user interactions.</p>
+<pre><code>def categorize(req, user):
+
+    userr = signing.loads(user, key=key)
+    obj = students.objects.get(stu_id = userr)
+    filtr = posts.objects.filter(category = req.GET.get('cat'))
+    print(req.GET.get('cat'), filtr)
+    data = {
+        'post':filtr,
+        'enp':user,
+        'stu':obj,
+    }
+    return render(req, &quot;categorize.html&quot;, data)
+</code></pre>
+<h2 id="notification-system-by-011201145">Notification System by 011201145</h2>
+<p>There is a notification system which used to notify all kind of activities such as upvoted posts, comment in a post, any club activities and so on. </p>
+<pre><code>&lt;div class=&quot;w-4/5 bg-gray-100 mt-8 flex flex-col rounded-2xl px-4 overflow-y-auto&quot; style=&quot;height: 50vh;&quot;&gt;
+                    &lt;h3 class=&quot;w-1/2 h-fit text-xl mt-6 font-bold text-gray-500&quot;&gt;Notification&lt;/h3&gt;
+
+                    {% for notis in noti %}
+                    &lt;div class=&quot;w-full mt-4 h-20 bg-gray-300 rounded-xl flex px-6&quot;&gt;
+                        &lt;svg class=&quot;w-10 h-30 text-gray-800 dark:text-white&quot; aria-hidden=&quot;true&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; fill=&quot;none&quot; viewBox=&quot;0 0 20 21&quot;&gt;
+                            &lt;path stroke=&quot;currentColor&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;0.9&quot; d=&quot;M10 3.464V1.1m0 2.365a5.338 5.338 0 0 1 5.133 5.368v1.8c0 2.386 1.867 2.982 1.867 4.175C17 15.4 17 16 16.462 16H3.538C3 16 3 15.4 3 14.807c0-1.193 1.867-1.789 1.867-4.175v-1.8A5.338 5.338 0 0 1 10 3.464ZM4 3 3 2M2 7H1m15-4 1-1m1 5h1M6.54 16a3.48 3.48 0 0 0 6.92 0H6.54Z&quot;/&gt;
+                        &lt;/svg&gt;
+                        &lt;div class=&quot;w-full h-full flex items-center ml-5&quot;&gt;
+                            &lt;h3&gt;{{notis.message}}&lt;/h3&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    {% endfor %}
+                &lt;/div&gt;
+</code></pre>
+<p>The Django view function "dashboard" handles a request to display the user dashboard. It checks for session validation, retrieves notifications for the logged-in user from the database, and includes the notifications in the data passed to the 'dashboard.html' template. This is likely part of a web application where users can view their personalized dashboard with notifications.</p>
+<pre><code>def dashboard(req, user):
+    if 'validate' in req.session:
+        ...
+        noti = notification.objects.filter(to = __obj)
+        ...
+        data = {
+            ...
+            'noti': noti,
+            ...
+        }
+
+        return render(req, 'dashboard.html', data)
+    else:
+        return redirect('login')
+</code></pre>
+<p>When a user interact, the system capture the interaction as message and save it to <strong>Notification</strong> database. For example, when a user upvote a post:</p>
+<pre><code>    message = user.firstName + &quot; &quot; + user.lastName + &quot; has upvoted your post.&quot;
+    notificat = notification(message = message, to=post_obj.student)
+    notificat.save()
+</code></pre>
+<p>This is how the notification system works.</p>
+<h2 id="real-time-chat-system-by-011201171">Real-time Chat System by 011201171</h2>
+<p>A user can chat or message any one who are a part of our system. There is a pop-up UI for chat system where available users and previous chats are displayed.</p>
+<pre><code>&lt;div id=&quot;pops&quot; class=&quot;absolute w-full h-full flex justify-center items-center&quot; style=&quot;display: none; background-color: rgba(94, 94, 94, 0.7);&quot;&gt;
+            &lt;div class=&quot;w-2/3 h-3/4 flex bg-white rounded-3xl px-5&quot; style=&quot;padding-top: 10px;&quot;&gt;
+                &lt;div class=&quot;w-1/3 h-full flex flex-col&quot;&gt;    
+                    &lt;div class=&quot;w-full flex justify-center items-center bg-gray-100 rounded-3xl&quot; style=&quot;height: 10vh;&quot;&gt;
+                        &lt;p class=&quot;text-2xl font-bold&quot;&gt;Chats&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div id=&quot;listdiv&quot; class=&quot;w-full h-5/6 flex flex-col items-center rounded-2xl&quot;&gt;
+                        {% for sts in all %}
+                        {% if sts != user %}
+                        &lt;div onclick=&quot;popmsgg('{{sts.stu_id}}', '{{sts.firstName}}', '{{sts.lastName}}')&quot; class=&quot;w-full rounded-2xl mt-4 flex bg-orange-300 items-center px-8&quot; style=&quot;height: 6vh;&quot;&gt;
+                            {% if sts.profpic.url != &quot;&quot; %}
+                            &lt;img src=&quot;{{sts.profpic.url}}&quot; alt=&quot;&quot; class=&quot;object-cover rounded-full w-12 h-12&quot; style=&quot;margin-right: 1vh;&quot;&gt;
+                            {% else %}
+                                &lt;img src=&quot;&quot; alt=&quot;&quot; class=&quot;object-cover rounded-full w-12 h-12 bg-black&quot; style=&quot;margin-right: 1vh;&quot;&gt;
+                            {% endif %}
+                            &lt;p class=&quot;ml-4&quot;&gt;{{sts.firstName|add:&quot; &quot;|add:sts.lastName}}&lt;/p&gt;
+                        &lt;/div&gt;
+                        {% endif %}
+                        {% endfor %}
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;w-2/3 h-full flex&quot;&gt;
+                    &lt;div class=&quot;w-full h-full flex flex-col px-4&quot; style=&quot;padding-bottom: 3vh;&quot;&gt;   
+                        &lt;div class=&quot;w-full bg-gray-100 flex flex-col justify-center px-8 rounded-2xl&quot; style=&quot;height: 8vh;&quot;&gt;
+                            &lt;p class=&quot;text-xl&quot; id=&quot;nn&quot;&gt;&lt;/p&gt;
+                            &lt;p&gt;Active now&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;w-full h-full flex flex-col&quot; style=&quot;padding: 2vh 0 0 0;&quot;&gt;
+                            &lt;div id=&quot;showmsg&quot; class=&quot;w-full flex flex-col overflow-y-auto&quot; style=&quot;height: 50vh;&quot;&gt;
+
+                            &lt;/div&gt;
+                            &lt;div class=&quot;w-full h-20&quot;&gt;
+                                &lt;div class=&quot;w-full h-full flex justify-between&quot;&gt;
+                                    &lt;input type=&quot;text&quot; name=&quot;msg&quot; id=&quot;msgg&quot; placeholder=&quot;Enter message&quot; class=&quot;flex justify-center w-3/4 h-3/4 rounded-3xl&quot;&gt;
+                                    &lt;button class=&quot;bg-orange-300 rounded-2xl w-1/4 h-3/4 ml-3&quot; data-ccsrf = '{% csrf_token %}' id=&quot;sendbtn&quot; onclick=&quot;sendd()&quot; &gt;Send&lt;/button&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+</code></pre>
+<p><strong>AJAX Implementation</strong></p>
+<p>The below code snippet is providing real time user update. The provided JavaScript code uses the setInterval function to periodically send a GET request to the 'refchat' URL in the Django project. This URL is dynamically generated using the user parameter 'enp'. The received HTML response is then used to update the content of the element with the 'chat' ID on the webpage at one-second intervals. Essentially, this code snippet implements a real-time update mechanism for the chat section on the webpage, refreshing the content every second.</p>
+<pre><code>        setInterval(function() {
+            $.ajax({
+                type: &quot;GET&quot;,
+                url: &quot;{% url 'refchat' user=enp %}&quot;,
+                dataType:'html',
+                success: function(res) {
+                    $('#chat').html(res) ;
+                },
+            });
+        }, 1000);
+</code></pre>
+<p>This code snippet provides real time message sending to another user. The provided JavaScript function 'sendd' is triggered when a user sends a message. It retrieves the message content from the 'msgbox' element, which represents a message input box on the webpage. The CSRF token is also obtained to ensure secure communication. The obtained message content and CSRF token are then sent as POST data to the 'sendmsg' URL in the Django project, which is dynamically generated using the 'enp' user parameter. Upon successful completion, a log message is printed to the console, indicating that the message has been sent successfully. Essentially, this code handles the client-side functionality for sending messages in a real-time chat system.</p>
+<pre><code>        let msgbox = document.getElementById('msgg') ;
+        function sendd() {
+            let ccs = $('[name=csrfmiddlewaretoken]').val();
+            let __msg = msgbox.value ;
+            msgbox.value = &quot;&quot; ;
+            console.log(ccs) ;
+            $.ajax({
+                type: &quot;POST&quot;,
+                url: &quot;{% url 'sendmsg' user=enp %}&quot;,
+                data: {
+                    csrfmiddlewaretoken: ccs,
+                    tousr : __idd,
+                    msg: __msg
+                },
+                success: function() {
+                    console.log(&quot;Sned successfully&quot;) ;
+                }
+            });
+        }
+</code></pre>
+<p><strong>Backend of Chat System</strong></p>
+<p>This code snippet provides chat contacts updation. The 'refreshchat' view in the Django project retrieves a user's information using the 'user' parameter, which is dynamically generated. It checks if the user is validated by checking the presence of the 'validate' key in the session. If validated, it obtains the student object associated with the user and filters active students. The gathered data, including the active students and the user's information, is then passed to the 'refreshchat.html' template for rendering. In essence, this view facilitates the refreshing of the chat interface by providing information about active users for chat interactions.</p>
+<pre><code>def refreshchat(req, user):
+    if 'validate' in req.session:
+        stuobj = students.objects.get(stu_id = signing.loads(user, key=key))
+        filtee = students.objects.filter(active = &quot;true&quot;)
+        print(stuobj)
+        data = {
+            'activ': filtee,
+            'user':stuobj,
+        }
+
+    return render(req, &quot;refreshchat.html&quot;, data)
+
+</code></pre>
+<p>The 'sendmsg' view in the Django project handles the process of sending messages between users. It extracts information from the request, such as the sender, receiver, and message content. The view checks if a conversation between the sender and receiver already exists. If it does, a new message is added to the existing conversation; otherwise, a new conversation is created, including the participants, and the message is added to this new conversation. The view returns a status code 204, indicating a successful operation without any content in the HTTP response. In summary, this view facilitates the sending of messages and manages the conversation structure between users.</p>
+<pre><code>def sendmsg (req, user) :
+
+    decrp = signing.loads(user, key=key)
+    obj = students.objects.get(stu_id = decrp)
+    toObj = students.objects.get(stu_id = req.POST.get('tousr')) 
+    _pk = toObj.stu_id+&quot;_&quot;+obj.stu_id
+    _orpk = obj.stu_id+&quot;_&quot;+toObj.stu_id
+
+    print(_pk, _orpk)
+
+
+    if conversations.objects.filter(pkk = _pk).exists():
+        mesg = messages.objects.create(convs=conversations.objects.get(pkk = _pk), sender = obj, msg = req.POST.get('msg'))
+    elif conversations.objects.filter(pkk = _orpk).exists():
+        mesg = messages.objects.create(convs=conversations.objects.get(pkk = _orpk), sender = obj, msg = req.POST.get('msg'))
+    else:
+        convo = conversations.objects.create(pkk = _pk)
+        convo.userss.add(obj, toObj)
+        mesg = messages.objects.create(convs=convo, sender = obj, msg = req.POST.get('msg'))
+
+    return HttpResponse(status=204)
+</code></pre>
+<p>The 'getmsg' view in the Django project is responsible for retrieving and displaying messages exchanged between two users. It extracts information from the request, such as the sender and receiver, and uses this information to determine the conversation ID (pk1 and pk2). The view checks if a conversation with the given ID exists. If it does, it retrieves all the messages associated with that conversation; otherwise, it sets the 'msgs' variable to an empty string. The retrieved messages, along with other relevant data, are then passed to the 'getmsg.html' template for rendering. In summary, this view handles the retrieval and display of messages in a conversation between two users.</p>
+<pre><code>def getmsg(req, user):
+    derc= signing.loads(user, key=key)
+    objj = students.objects.get(stu_id = derc) 
+
+    toobj = students.objects.get(stu_id = req.GET.get('to_id'))
+
+    pk1 = objj.stu_id + &quot;_&quot; + toobj.stu_id
+    pk2 = toobj.stu_id+ &quot;_&quot;+ objj.stu_id
+
+    if conversations.objects.filter(pkk = pk1).exists():
+        msgs = messages.objects.filter(convs = conversations.objects.get(pkk = pk1)) 
+    elif conversations.objects.filter(pkk = pk2).exists():
+        msgs = messages.objects.filter(convs = conversations.objects.get(pkk = pk2))
+    else:
+        msgs = &quot;&quot;
+
+    data = {
+        &quot;enp&quot;: user,
+        &quot;user&quot;: objj,
+        &quot;msgs&quot;:msgs,
+    }
+
+    return render(req, 'getmsg.html', data)
+</code></pre>
+<p>Thats the overall chatting system mechanism. </p>
+<h2 id="university-notice-panel-by-011203010">University Notice Panel by 011203010</h2>
+<p><strong>Notification Panel</strong> is one of the key features in our system. We have implemented the feature by using <strong>Web Scrapping</strong>. Here <code>Python beautifulSoup</code> module was implemented. The provided HTML code represents a dynamic list of hyperlinks ('a' elements) displayed within a container. It utilizes the Django template language with a for loop to iterate through pairs of links and corresponding headings provided by the 'zip' variable. For each iteration, it generates a div element with a specific style, containing a hyperlink with the associated URL and text. </p>
+<pre><code>        &lt;div class=&quot;w-full h-full flex flex-col overflow-y-auto bg-gray-100 mt-3 rounded-2xl ml-3 px-10&quot;&gt;
+            {% for link, head in zip %}
+            &lt;div class=&quot;mt-4 rounded-xl h-20 w-full bg-orange-100 text-2xl flex items-center px-20&quot; style=&quot;height: 10vh;&quot;&gt;
+                &lt;a href=&quot;{{link}}&quot; target=&quot;_blank&quot; class=&quot;h-full&quot;&gt;{{head}}&lt;/a&gt;
+            &lt;/div&gt;        
+            {% endfor %}    
+        &lt;/div&gt;
+</code></pre>
+<p><strong>Backend</strong></p>
+<p>The provided Django view function, named 'notice', fetches the latest notices from the UIU website. It uses the <code>requests</code> library to retrieve content from multiple pages on the UIU notices section. The <code>BeautifulSoup</code> library is then employed to parse the HTML content and extract relevant information such as notice headlines and corresponding links. The extracted data is zipped together into a 'zipit' variable, which is then passed to the 'notice.html' template along with user and additional data. In the template, this information is used to dynamically generate a list of clickable notice headlines, each linked to its respective notice page on the UIU website. The 'alls' variable appears to retrieve all student objects from the database, but its usage is not clear in this context.</p>
+<pre><code>def notice(req, user):
+
+    dumm = signing.loads(user, key=key)
+    obj = students.objects.get(stu_id = dumm)
+    noticee = []
+    linkss = []
+    for i in range(0, 3):
+        reqs = requests.get(&quot;https://www.uiu.ac.bd/notices/page/&quot;+str(i))
+        soup = BeautifulSoup(reqs.content, &quot;html.parser&quot;)
+        for links in soup.find_all(&quot;article&quot;):
+            headrs = links.find('header')
+            h2 = headrs.find(&quot;h2&quot;)
+            a = h2.find(&quot;a&quot;)
+            # print(a.get(&quot;href&quot;))
+            linkss.append(a.get(&quot;href&quot;))
+            noticee.append(h2.text)
+
+        zipit = zip(linkss, noticee)
+        print(zipit)
+
+    alls = students.objects.all()
+    data = {
+        'user':obj,
+        'enp':user,
+        'zip':zipit,
+        'all': alls,
+    }
+    return render(req, &quot;notice.html&quot;, data)
+</code></pre>
+<h2 id="club-management-by-011201195">Club Management by 011201195</h2>
+<p>Club management feature is the unique feature of our project. Here a user can create and manage clubs. For implementing the feature we have create a window where all clubs will be displayed and users can access them through the window. </p>
+<pre><code>    &lt;div class=&quot;w-full h-full bg-gray-100 flex flex-col px-20&quot;&gt;
+        &lt;div class=&quot;w-full h-20 flex justify-end items-center&quot;&gt;
+            &lt;button onclick=&quot;ppup()&quot; class=&quot; mt-5 w-1/5 h-3/4 bg-orange-300 flex justify-center items-center rounded-2xl text-md font-bold&quot;&gt;
+                &lt;svg class=&quot;w-6 h-6 text-gray-800 dark:text-white&quot; aria-hidden=&quot;true&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; fill=&quot;currentColor&quot; viewBox=&quot;0 0 20 20&quot;&gt;
+                    &lt;path d=&quot;M9.546.5a9.5 9.5 0 1 0 9.5 9.5 9.51 9.51 0 0 0-9.5-9.5ZM13.788 11h-3.242v3.242a1 1 0 1 1-2 0V11H5.304a1 1 0 0 1 0-2h3.242V5.758a1 1 0 0 1 2 0V9h3.242a1 1 0 1 1 0 2Z&quot;/&gt;
+                &lt;/svg&gt;
+                &lt;h3 class=&quot;ml-5&quot;&gt;Create Club&lt;/h3&gt;
+            &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;w-full h-full flex flex-col overflow-y-auto mt-3&quot;&gt;
+            &lt;div class=&quot;w-3/4 h-fit flex flex-col mb-5&quot;&gt;
+                &lt;h3 class=&quot;text-3xl font-bold&quot;&gt;Clubs&lt;/h3&gt;
+                &lt;h3 class=&quot;text-md &quot;&gt;Manage and access all of your clubs from here.&lt;/h3&gt;
+            &lt;/div&gt;
+
+            {% for c in club %}
+            &lt;div class=&quot;w-3/4 mt-6 flex items-center px-20 rounded-2xl h-1/5 bg-gray-300&quot;&gt;
+                &lt;img src=&quot;&quot; alt=&quot;&quot; class=&quot;rounded-full bg-orange-300&quot; style=&quot;width: 150px ; height: 150px;&quot;&gt;
+                &lt;div class=&quot;w-2/3 h-full flex justify-center flex-col ml-8&quot;&gt;
+                    &lt;h3 class=&quot;text-4xl font-bold&quot;&gt;{{c.clubname}}&lt;/h3&gt;
+                    &lt;h3&gt;{{c.purpose}}&lt;/h3&gt;
+                &lt;/div&gt;
+                {% if c.adminid == obj %}
+                &lt;a id=&quot;{{c.clubname}}&quot; href=&quot;{% url 'cdash' user=enp club=c.clubname %}&quot; class=&quot;w-1/6 h-1/3 ml-8 flex justify-center items-center text-2xl text-white rounded-2xl&quot; style=&quot;background-color: blue;&quot;&gt;Enter&lt;/a&gt;
+                {% else %}
+                &lt;a id=&quot;{{c.clubname}}&quot; href=&quot;{% url 'approval' user=enp club=c.clubname %}&quot; class=&quot;w-1/6 h-1/3 bg-green-500 ml-8 flex justify-center items-center text-2xl text-white rounded-2xl&quot;&gt;Join&lt;/a&gt;
+                {% endif %}
+
+            &lt;/div&gt;
+            {% endfor %}
+        &lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+<p>Moreover, a user can create a club. The form is designed to provide essential details for creating a club, and it includes client-side interactivity, such as enabling/disabling certain fields based on the user's selection of admin type.</p>
+<pre><code>    &lt;div id=&quot;club&quot; class=&quot;absolute w-full h-full flex flex-col items-center&quot; style=&quot;display: none;&quot;&gt;
+        &lt;div class=&quot;bg-white rounded-xl mt-10 px-20 flex flex-col items-center&quot; style=&quot;width: 50%; height: 80%; margin-left: 25%;&quot;&gt;
+            &lt;h3 class=&quot;text-3xl font-bold mt-5 mb-1&quot;&gt;Create Your Club&lt;/h3&gt;
+            &lt;h3&gt;Give information of the club below&lt;/h3&gt;
+
+            &lt;div class=&quot;w-full h-full mt-20&quot;&gt;
+                &lt;form class=&quot;w-full h-full flex&quot; method=&quot;POST&quot; action=&quot;{% url 'addclub' user=enp %}&quot;&gt;
+                    {% csrf_token %}
+                    &lt;div class=&quot;w-1/2 h-full flex flex-col&quot; &gt;
+                        &lt;label for=&quot;cname&quot;&gt;Club name&lt;/label&gt;
+                        &lt;input type=&quot;text&quot; class=&quot;rounded-xl&quot; name=&quot;cname&quot; id=&quot;cname&quot; placeholder=&quot;Enter Club Name&quot;&gt;
+                        &lt;label class=&quot;mt-4&quot; for=&quot;ctype&quot;&gt; Choose type&lt;/label&gt;
+                        &lt;select name=&quot;ctype&quot; class=&quot;rounded-xl&quot; id=&quot;ctype&quot;&gt;
+                            &lt;option value=&quot;sports&quot;&gt;Sports&lt;/option&gt;
+                            &lt;option value=&quot;cultural&quot;&gt;Cultural&lt;/option&gt;
+                            &lt;option value=&quot;education&quot;&gt;Education&lt;/option&gt;
+                            &lt;option value=&quot;robotics&quot;&gt;Robotics&lt;/option&gt;
+                            &lt;option value=&quot;contest&quot;&gt;Contest&lt;/option&gt;
+
+                        &lt;/select&gt;
+                        &lt;label class=&quot;mt-4&quot; for=&quot;purpose&quot;&gt;Club purpose&lt;/label&gt;
+                        &lt;textarea class=&quot;text-md rounded-xl&quot; name=&quot;purpose&quot; id=&quot;purpose&quot; cols=&quot;10&quot; rows=&quot;6&quot; style=&quot;resize: none;&quot;&gt;&lt;/textarea&gt;
+
+                        &lt;label class=&quot;mt-4&quot; for=&quot;rules&quot;&gt;Rules and Regulations&lt;/label&gt;
+                        &lt;textarea class=&quot;text-md rounded-xl&quot; name=&quot;rules&quot; id=&quot;rules&quot; cols=&quot;10&quot; rows=&quot;6&quot; style=&quot;resize: none;&quot;&gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;w-1/2 h-full flex flex-col&quot; style=&quot;margin-left: 4%;&quot;&gt;
+                        &lt;div class=&quot;w-full flex flex-col h-fit text-xl &quot;&gt;
+                            &lt;label for=&quot;&quot; &gt;Who are you?&lt;/label&gt;
+                            &lt;div class=&quot;flex w-full items-center&quot;&gt;
+                                &lt;input type=&quot;radio&quot; onclick=&quot;ad()&quot; name=&quot;admin&quot; id=&quot;admin&quot; value=&quot;Admin&quot; checked&gt;
+                                &lt;label for=&quot;admin&quot; class=&quot;ml-1&quot;&gt;Admin&lt;/label&gt;
+                                &lt;input type=&quot;radio&quot; onclick=&quot;notad()&quot; class=&quot;ml-5&quot; name=&quot;admin&quot; id=&quot;nadmin&quot; value=&quot;Not Admin&quot;&gt;
+                                &lt;label for=&quot;admin&quot; class=&quot;ml-1&quot;&gt;Not admin&lt;/label&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;label for=&quot;name&quot; class=&quot;mt-4&quot;&gt;Admin name&lt;/label&gt;
+                        &lt;input class=&quot;rounded-xl&quot; type=&quot;text&quot; name=&quot;adminname&quot; id=&quot;name&quot; placeholder=&quot;Admin Name&quot; disabled&gt;
+                        &lt;label for=&quot;id&quot; class=&quot;mt-4&quot;&gt;Admin email/Student ID&lt;/label&gt;
+                        &lt;input class=&quot;rounded-xl&quot; type=&quot;text&quot; name=&quot;adminmail&quot; id=&quot;id&quot; placeholder=&quot;Admin email or Student ID&quot; disabled&gt;
+                        &lt;label for=&quot;accep&quot; class=&quot;font-bold mt-4&quot;&gt;Are you agree with us?&lt;/label&gt;
+                        &lt;div class=&quot;w-fit h-fit flex mt-2&quot;&gt;
+                            &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; x=&quot;0px&quot; y=&quot;0px&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                                &lt;path d=&quot;M11,16.4l-4.7-4.7l1.4-1.4l3.3,3.3l8.4-8.4C17.5,3.3,14.9,2,12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10 c0-1.9-0.5-3.6-1.4-5.1L11,16.4z&quot;&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                            &lt;h3 class=&quot;ml-2&quot;&gt;The club is not for commercial purposes.&lt;/h3&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;w-fit h-fit flex mt-2&quot;&gt;
+                            &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; x=&quot;0px&quot; y=&quot;0px&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                                &lt;path d=&quot;M11,16.4l-4.7-4.7l1.4-1.4l3.3,3.3l8.4-8.4C17.5,3.3,14.9,2,12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10 c0-1.9-0.5-3.6-1.4-5.1L11,16.4z&quot;&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                            &lt;h3 class=&quot;ml-2&quot;&gt;Try to keep maintain a good bonding among members&lt;/h3&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;w-fit h-fit flex mt-2&quot;&gt;
+                            &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; x=&quot;0px&quot; y=&quot;0px&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                                &lt;path d=&quot;M11,16.4l-4.7-4.7l1.4-1.4l3.3,3.3l8.4-8.4C17.5,3.3,14.9,2,12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10 c0-1.9-0.5-3.6-1.4-5.1L11,16.4z&quot;&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                            &lt;h3 class=&quot;ml-2&quot;&gt;Any kind of vulgar content should not be allowed.&lt;/h3&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;w-fit h-fit flex mt-2&quot;&gt;
+                            &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; x=&quot;0px&quot; y=&quot;0px&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+                                &lt;path d=&quot;M11,16.4l-4.7-4.7l1.4-1.4l3.3,3.3l8.4-8.4C17.5,3.3,14.9,2,12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10 c0-1.9-0.5-3.6-1.4-5.1L11,16.4z&quot;&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                            &lt;h3 class=&quot;ml-2&quot;&gt;Check the members identity before approval.&lt;/h3&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;w-fit h-fit flex mt-2 items-center&quot;&gt;
+                            &lt;input type=&quot;checkbox&quot; name=&quot;agree&quot; id=&quot;&quot;&gt;
+                            &lt;h3 class=&quot;ml-2&quot;&gt;I am agree with the conditions.&lt;/h3&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;w-full h-fit flex justify-end px-1 mt-8&quot;&gt;
+
+                            &lt;input class=&quot;w-full h-14 bg-green-500 flex justify-center items-center&quot; type=&quot;submit&quot; name=&quot;sub&quot; id=&quot;&quot; value=&quot;Create Group&quot;&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                &lt;/form&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+<p><strong>Backend</strong></p>
+<p>The <code>createClub</code> view function is an integral part of a Django web application, responsible for managing the creation of clubs within the system. It first checks whether the user is authenticated by verifying the presence of the 'validate' key in the session. Upon receiving a POST request, indicating the submission of a form, the function extracts essential details such as the club name, type, purpose, rules, and the type of administrator (admin or non-admin). Depending on the admin type, it determines the admin's name and object. Subsequently, a new club object is created with the provided information and stored in the database. The function then redirects the user to the 'club' page, ensuring a seamless user experience in club creation within the web application.</p>
+<pre><code>def createClub(req, user):
+    if 'validate' in req.session:
+
+        derc = signing.loads(user, key=key)
+        obj = students.objects.get(stu_id = derc)
+
+        if req.method == &quot;POST&quot;:
+            cname = req.POST['cname']
+            ctype = req.POST['ctype']
+            purpose = req.POST['purpose']
+            rules = req.POST['rules']
+            admin = req.POST['admin']
+            print(admin)
+            if admin == 'Admin':
+                a_name = obj.firstName + &quot; &quot; + obj.lastName
+                a_obj = obj
+            else:
+                a_name = req.POST['adminname']
+                a_obj = students.objects.get(stu_id = req.POST['adminmail'])
+
+            clu = clubs(clubname = cname, clubtype = ctype, purpose = purpose, rules = rules, adminname = a_name, adminid = a_obj)
+
+            clu.save()
+
+        return redirect('club', user)
+    else:
+        return redirect('login')
+</code></pre>
+<p>A user can access to particular group if he/she is approved by club admin. For that a user must have to send a request to the club. The club admin review it and approve/decline it. The <code>clubApprove</code> view function plays a crucial role in handling club approval within a Django web application. It first checks the user's authentication status by verifying the presence of the 'validate' key in the session. Upon validation, the function retrieves essential information, including the targeted club and the current user. It then checks whether the user is the administrator of the club. If so, the approval status is set to "Enter". Otherwise, it is marked as "Pending". A new club approval entry is created with the club, student, status, and admin information, and it is saved in the database. Finally, the user is redirected to the 'club' page, ensuring a smooth flow in managing club approvals within the web application.</p>
+<pre><code>def clubApprove(req, user, club):
+    if 'validate' in req.session:
+        clubd = clubs.objects.get(clubname = club)
+        student = students.objects.get(stu_id = signing.loads(user, key=key))
+        admin = clubd.adminid
+        if admin == student:
+            status = &quot;Enter&quot;
+        else:
+            status = &quot;Pending&quot;
+
+        clubapprv = clubApproval(clubid = clubd, studentss = student, status = status, admin = admin)
+        clubapprv.save()
+
+        return redirect('club', user=user) 
+    else:
+        return redirect('login')
+</code></pre>
+<h2 id="club-dashboard-by-011201195-and-011201148">Club Dashboard by 011201195 and 011201148</h2>
+<p>When a user enters into a club he/she can see the posts regarding a club. Moreover, the upcoming events are also displayed there. So a user can easily interact with the events. For <strong>club admin</strong> there will be a scetion from where he/she can manage the approval requests.</p>
+<p><strong>Club Posts</strong></p>
+<pre><code>    &lt;div class=&quot;w-full h-full flex &quot;&gt;
+        &lt;div class=&quot;w-2/3 h-full flex flex-col&quot;&gt;
+            &lt;img src=&quot;{% static 'img/uiu.jpg' %}&quot; alt=&quot;&quot; class=&quot;mt-5 object-cover bg-center  w-full h-1/4 rounded-2xl&quot;&gt;
+            &lt;h3 class=&quot;w-full text-3xl font-bold mt-8 ml-8 bg-orange-100&quot;&gt;All Posts&lt;/h3&gt;
+            &lt;div class=&quot;w-full h-3/4 mt-5 flex flex-col items-center&quot; style=&quot;padding: 0 20vh 0 20vh&quot;&gt;
+                &lt;div class=&quot;flex w-full justify-center items-center rounded-xl bg-gray-100&quot; style=&quot;height: 8vh;&quot;&gt;
+                    {% if obj.profpic.url != &quot;&quot; %}
+                        &lt;img src=&quot;{{obj.profpic.url}}&quot; alt=&quot;&quot; class=&quot;object-cover rounded-full w-12 h-12&quot; style=&quot;margin-right: 1vh;&quot;&gt;
+                    {% else %}
+                        &lt;img src=&quot;&quot; alt=&quot;&quot; class=&quot;object-cover rounded-full w-12 h-12 bg-black&quot; style=&quot;margin-right: 1vh;&quot;&gt;
+                    {% endif %}
+                    &lt;button class=&quot;w-2/3 ml-3 pl-8 text-gray-300 bg-transparent flex items-center rounded-2xl&quot; style=&quot;height: 5vh; border: 1px solid #0c0c0ccc&quot; onclick=&quot;popup()&quot;&gt;Share your thoughts&lt;/button&gt;
+                &lt;/div&gt;
+
+                {% for posts in cpost %}
+                &lt;div class=&quot;w-full h-fit flex flex-col rounded-2xl bg-orange-100 px-8 mt-6 mb-2&quot;&gt;
+                    &lt;div class=&quot;w-full h-20 flex items-center&quot;&gt;
+                        {% if posts.student.profpic.url != &quot;&quot; %}
+                        &lt;img src=&quot;{{posts.student.profpic.url}}&quot; alt=&quot;&quot; class=&quot;object-cover rounded-full w-12 h-12&quot; style=&quot;margin-right: 1vh;&quot;&gt;
+                    {% else %}
+                        &lt;img src=&quot;&quot; alt=&quot;&quot; class=&quot;object-cover rounded-full w-12 h-12 bg-black&quot; style=&quot;margin-right: 1vh;&quot;&gt;
+                    {% endif %}
+                        &lt;div class=&quot;w-2/3 h-fit flex flex-col&quot;&gt;
+                            &lt;h3 class=&quot;ml-2 text-md font-bold&quot;&gt;{{posts.student.firstName|add:&quot; &quot;|add:posts.student.lastName}}&lt;/h3&gt;
+                            &lt;h3 class=&quot;ml-2&quot;&gt;{{posts.student.batch}}&lt;/h3&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;w-full h-fit mt-2 mb-6&quot;&gt;
+                        &lt;p&gt;{{posts.texts}}&lt;/p&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class=&quot;w-full h-10 flex mb-5 justify-center items-center&quot;&gt;
+                        &lt;div class=&quot;w-1/2 h-full flex&quot;&gt;
+                            &lt;button id=&quot;{{posts.iid}}&quot; data-clubid = &quot;{{clbname}}&quot; data-csrf='{% csrf_token %}' data-student=&quot;{{enp}}&quot; data-post=&quot;{{posts.iid}}&quot; class=&quot;vote w-full h-full flex items-center justify-center rounded-2xl hover:text-orange-500 hover:font-bold focus:bg-orange-300&quot;&gt;
+                                &lt;svg class=&quot;w-6 h-6 text-gray-800 dark:text-white&quot; aria-hidden=&quot;true&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; fill=&quot;none&quot; viewBox=&quot;0 0 20 20&quot;&gt;
+                                    &lt;path stroke=&quot;currentColor&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;0.9&quot; d=&quot;M4.008 8.714c1-.097 1.96-.45 2.792-1.028a25.112 25.112 0 0 0 4.454-5.72 1.8 1.8 0 0 1 .654-.706 1.742 1.742 0 0 1 1.65-.098 1.82 1.82 0 0 1 .97 1.128c.075.248.097.51.065.767l-1.562 4.629M4.008 8.714H1v9.257c0 .273.106.535.294.728a.99.99 0 0 0 .709.301h1.002a.99.99 0 0 0 .71-.301c.187-.193.293-.455.293-.728V8.714Zm8.02-1.028h4.968c.322 0 .64.08.925.232.286.153.531.374.716.645a2.108 2.108 0 0 1 .242 1.883l-2.36 7.2c-.288.813-.48 1.354-1.884 1.354-2.59 0-5.39-1.06-7.504-1.66&quot;/&gt;
+                                &lt;/svg&gt;
+                                &lt;h3 class=&quot;ml-2&quot;&gt;Upvote&lt;/h3&gt;
+                            &lt;/button&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;w-1/2 h-full&quot;&gt;
+                            &lt;button class=&quot;w-full h-full flex justify-center items-center hover:text-orange-500&quot;&gt;
+                                &lt;svg class=&quot;w-6 h-6 text-gray-800 dark:text-white&quot; aria-hidden=&quot;true&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; fill=&quot;none&quot; viewBox=&quot;0 0 20 18&quot;&gt;
+                                    &lt;path stroke=&quot;currentColor&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;0.9&quot; d=&quot;M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z&quot;/&gt;
+                                &lt;/svg&gt;
+                                &lt;h3 class=&quot;ml-2&quot;&gt;Comment&lt;/h3&gt;
+                            &lt;/button&gt;
+                        &lt;/div&gt;
+
+
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                {% endfor %}
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+</code></pre>
+<p><strong>Approval Management Section</strong></p>
+<pre><code>        &lt;div class=&quot;w-1/3 h-full flex flex-col&quot;&gt;
+            &lt;div class=&quot;h-1/2 w-full flex&quot;&gt;
+                &lt;div class=&quot;flex flex-col w-1/2 h-full overflow-y-auto&quot;&gt;
+                    &lt;h3 class=&quot;text-xl font-bold mt-8 ml-8&quot;&gt;All members&lt;/h3&gt;
+                    {% for join in joined%}
+                    &lt;div class=&quot;mt-1 w-full h-fit flex flex-col px-8&quot;&gt;
+                        &lt;div class=&quot;mt-3 w-full flex items-center&quot; style=&quot;height: 7vh;&quot;&gt;
+                            {% if join.studentss.profpic.url != &quot;&quot; %}
+                        &lt;img src=&quot;{{join.studentss.profpic.url}}&quot; alt=&quot;&quot; class=&quot;object-cover rounded-full w-12 h-12&quot; style=&quot;margin-right: 1vh;&quot;&gt;
+                    {% else %}
+                        &lt;img src=&quot;&quot; alt=&quot;&quot; class=&quot;object-cover rounded-full w-12 h-12 bg-black&quot; style=&quot;margin-right: 1vh;&quot;&gt;
+                    {% endif %}
+                            &lt;h3 class=&quot;ml-5&quot;&gt;{{join.studentss.firstName|add:&quot; &quot;|add:join.studentss.lastName}}&lt;/h3&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    {% endfor %}
+                &lt;/div&gt;
+                &lt;div class=&quot;flex flex-col w-1/2 h-full overview-y-auto&quot;&gt;
+                    &lt;h3 class=&quot;text-xl font-bold mt-8 ml-8&quot;&gt;Pending Requests&lt;/h3&gt;
+                    {% for pend in pendings %}
+                    &lt;div class=&quot;mt-3 w-full h-fit flex justify-center items-center px-8&quot;&gt;
+                        &lt;div class=&quot; w-full flex items-center&quot; style=&quot;height: 7vh;&quot;&gt;
+                            {% if pend.studentss.profpic.url != &quot;&quot; %}
+                        &lt;img src=&quot;{{pend.studentss.profpic.url}}&quot; alt=&quot;&quot; class=&quot;object-cover rounded-full w-12 h-12&quot; style=&quot;margin-right: 1vh;&quot;&gt;
+                    {% else %}
+                        &lt;img src=&quot;&quot; alt=&quot;&quot; class=&quot;object-cover rounded-full w-12 h-12 bg-black&quot; style=&quot;margin-right: 1vh;&quot;&gt;
+                    {% endif %}
+                            &lt;h3 class=&quot;ml-3&quot;&gt;{{pend.studentss.firstName}}&lt;/h3&gt;
+                        &lt;/div&gt;
+                        &lt;a class=&quot;px-2 bg-orange-100&quot; href=&quot;{% url 'doapprove' club=pend.clubid.clubname student=pend.studentss.stu_id %}&quot;&gt;Approve&lt;/a&gt;
+                    &lt;/div&gt;
+                    {% endfor %}
+                &lt;/div&gt;
+        &lt;/div&gt;
+</code></pre>
+<p><strong>Events Section</strong></p>
+<pre><code>            &lt;div class=&quot;h-1/2 w-full flex flex-col&quot;&gt;
+                &lt;div class=&quot;w-full px-8 flex items-center justify-between&quot; style=&quot;height: 7vh;&quot;&gt;
+                    &lt;h3 class=&quot;h-fit text-xl font-bold&quot;&gt;Upcoming Events&lt;/h3&gt;
+                    &lt;button onclick=&quot;popevent()&quot; id=&quot;hover&quot; class=&quot;flex w-1/3 h-1/2 justify-center items-center&quot; style=&quot;margin-left: 13vh; color: rgb(19, 22, 199);&quot;&gt;
+                        Create new event
+                    &lt;/button&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;w-full h-full flex flex-col px-8 mt-3 overflow-y-auto&quot;&gt;
+                    {% for eve in events %}
+                    &lt;div class=&quot;w-full h-1/2 flex flex-col px-6 shadow-2xl rounded-xl&quot;&gt;
+                        &lt;img src=&quot;{{ eve.bannerImg.url }}&quot; alt=&quot;&quot; class=&quot;object-cover w-full bg-white mt-2 rounded-2xl&quot; style=&quot;height:5vh;&quot;&gt;
+                        &lt;h3 class=&quot;font-bold text-3xl mt-2&quot; style=&quot;color: gray;&quot;&gt;{{eve.name}}&lt;/h3&gt;
+                        &lt;div class=&quot;w-full h-1/3 flex justify-between mt-1&quot; style=&quot;color: rgb(109, 109, 109);&quot;&gt;
+                            &lt;div class=&quot;flex w-fit h-fit items-center&quot;&gt;
+                                &lt;label for=&quot;sd&quot; class=&quot;font-bold text-xl&quot;&gt;Start:&lt;/label&gt;
+                                &lt;h3 class=&quot;ml-2&quot;&gt;{{eve.stime}}&lt;/h3&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;flex items-center w-fit h-fit&quot;&gt;
+                                &lt;label for=&quot;ed&quot; class=&quot;font-bold text-xl&quot;&gt;End:&lt;/label&gt;
+                                &lt;h3 class=&quot;ml-2&quot;&gt;{{eve.etime}}&lt;/h3&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;flex w-full h-1/2 justify-end&quot; style=&quot;margin-bottom: 2vh;&quot;&gt;
+                            &lt;button onclick=&quot;viewdetails('{{eve.name}}')&quot; class=&quot;w-1/2 h-full rounded-xl justify-center items-center text-white text-xl&quot; style=&quot;background-color: rgb(40, 77, 110);&quot;&gt;View Details&lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+</code></pre>
+<p><strong>Event Creation Backend</strong></p>
+<pre><code>def event(req, user, club):
+    print(club)
+    if 'validate' in req.session and req.method == &quot;POST&quot;:
+        if 'img' in req.FILES:
+            bannerr = req.FILES['img']
+        else:
+            bannerr = &quot;&quot;
+        print(bannerr)
+        name = req.POST['ename']
+        cat = req.POST['cate']
+        clubss = clubs.objects.get(clubname = club)
+        studentss = students.objects.get(stu_id = signing.loads(user, key=key))
+        stime = req.POST['sdate']
+        etime = req.POST['edate']
+        details = req.POST['details']
+
+        _vent = eevent(bannerImg = bannerr, name=name, cat=cat, club=clubss, admin = studentss, stime = stime, etime = etime, details = details)
+
+        _vent.save()
+
+        members = clubApproval.objects.filter(clubid = clubss).filter(status = &quot;Joined&quot;)
+
+        messg = studentss.firstName + &quot; &quot; + studentss.lastName+ &quot; have announced an event you may interested in.&quot;
+        for mems in members:
+            noti = notification(message = messg, to = mems.studentss)
+            noti.save()
+
+        return redirect('cdash', user=user, club=club)
+    else:
+        return redirect('login')
+</code></pre>
+<p>Here the posts management, upvoting and commenting were done by id <strong>011201148</strong>.</p>
+<pre><code>def clubposthandling(req, user, club):
+    if 'validate' in req.session:
+        if req.method == &quot;POST&quot;:
+            texts = req.POST['texts']
+            studnt = students.objects.get(stu_id = signing.loads(user, key=key))
+            clubb = clubs.objects.get(clubname = club)
+            iid = clubb.clubname + &quot; &quot; + datetime.now().strftime(&quot;%d-%m-%Y-%H-%S&quot;)
+
+            clubposts = clubpost(texts = texts, clubidd = clubb, student = studnt, iid = iid)
+            clubposts.save()
+
+            return redirect('cdash', user=user, club=club)
+        return HttpResponse(&quot;Hello&quot;)
+    else:
+        return redirect('login')
+</code></pre>
+<p><strong>AJAX implementation in Showing Events details</strong></p>
+<p>The JavaScript function <code>viewdetails</code> is designed to display event details on a web page. When invoked with a specific event identifier (<code>str</code>), it first retrieves the HTML container element with the ID 'details' and sets its display style to "flex," making it visible. Subsequently, an <strong>AJAX</strong> request is made to the server using the URL associated with the 'vdetails' view in the Django application. The event identifier is included as a parameter in the request. Upon successful execution, the response received from the server, containing the details of the specified event, is injected into the HTML container with the ID 'container'. This dynamic loading of event details enables a seamless user experience without requiring a full page reload.</p>
+<pre><code>function viewdetails(str) {
+            let eventt = document.getElementById('details') ;
+            eventt.style.display = &quot;flex&quot; ;
+
+            $.ajax({
+                type: &quot;GET&quot;,
+                url: &quot;{% url 'vdetails' user=enp %}&quot;,
+                data: {
+                    event: str,
+                },
+                success: function(res) {
+                    $('#container').html(res) ;
+                }
+            });
+        }
+</code></pre>
+<h2 id="job-searching-by-011201145">Job Searching by 011201145</h2>
+<p>In our system <strong>Job searching</strong> is also another unique features. Here a user can search jobs and apply for it. Here we have used <strong>Web scrapping</strong> to fetch the jobs from <strong>BDJobs</strong>. Using the requests library to fetch the HTML content and BeautifulSoup to parse it. Extracting relevant information (title, company, location, description, apply link) from the HTML.</p>
+<pre><code>def scrape_bdjobs():
+    url = &quot;https://www.bdjobs.com/&quot;
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, &quot;html.parser&quot;)
+
+    jobs = []
+    for job_elem in soup.find_all(&quot;div&quot;, class_=&quot;job-title&quot;):
+        title_elem = job_elem.find(&quot;a&quot;)
+        company_elem = job_elem.find_next(&quot;div&quot;, class_=&quot;comp-name-text&quot;)
+        location_elem = job_elem.find_next(&quot;div&quot;, class_=&quot;locon&quot;)
+        apply_link = title_elem.get(&quot;href&quot;)
+
+        job = Job(
+            title=title_elem.text.strip(),
+            company=company_elem.text.strip(),
+            location=location_elem.text.strip(),
+            apply_link=apply_link,
+        )
+        jobs.append(job)
+
+    return jobs
+</code></pre>
+<p>The provided HTML template is designed for rendering job listings on a webpage. It utilizes a loop to iterate through a list of job objects and dynamically generates HTML content for each job, including details such as job title, company, location, and a link to apply. The template allows for a clean and organized display of job information on the frontend.</p>
+<pre><code>
+&lt;h1&gt;Job Listings&lt;/h1&gt;
+{% for job in job_listings %}
+    &lt;div&gt;
+        &lt;h2&gt;{{ job.title }}&lt;/h2&gt;
+        &lt;p&gt;{{ job.company }} - {{ job.location }}&lt;/p&gt;
+        &lt;p&gt;{{ job.description }}&lt;/p&gt;
+        &lt;a href=&quot;{{ job.apply_link }}&quot; target=&quot;_blank&quot;&gt;Apply Now&lt;/a&gt;
+    &lt;/div&gt;
+{% endfor %}
+</code></pre>
+<h2 id="user-profile-by-011203010">User Profile by 011203010</h2>
+<p>Users can see their profile to check his/her previous posts and informations. The provided Django view function is for rendering a user profile page. It retrieves the user object based on the provided user ID, loads associated posts and likes data, and then passes this information to the corresponding HTML template <code>profile.html</code>. The template is responsible for displaying the user's profile information, including posts and associated likes, providing a comprehensive view of the user's activity on the platform.</p>
+<p><strong>Fetching Information</strong></p>
+<pre><code>def profile(req, user):
+    obj = students.objects.get(stu_id = signing.loads(user, key=key))
+
+    pObj = posts.objects.filter(student = obj)
+    like = likes.objects.all()
+    data = {
+        &quot;user&quot;:obj,
+        'enp':user,
+        'post':pObj,
+        'likes':like,
+    }
+
+    return render(req, &quot;profile.html&quot;, data)
+</code></pre>
+<p><strong>Frontend functions</strong></p>
+<pre><code>&lt;div class=&quot;w-full h-full flex&quot;&gt;
+
+        &lt;div class=&quot;w-1/5 bg-orange-300 flex-col rounded-2xl&quot; style=&quot;height: 50vh;&quot;&gt;
+            &lt;div class=&quot; mt-10 ml-5 flex justify-center items-center px-20 rounded-full bg-black&quot; style=&quot;height: 15vh; width: 15vh;  background-image: url(''); background-size: cover; background-position: center; background-repeat: no-repeat;&quot;&gt;
+
+                &lt;label for=&quot;image&quot; class=&quot;img mt-10 font-bold mb-2 w-full&quot;&gt;
+
+                    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; fill=&quot;currentColor&quot; class=&quot;bi bi-camera-fill&quot; style=&quot;margin-right: 9px;&quot; viewBox=&quot;0 0 16 16&quot;&gt;
+                        &lt;path d=&quot;M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z&quot;/&gt;
+                        &lt;path d=&quot;M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z&quot;/&gt;
+                    &lt;/svg&gt;
+                &lt;/label&gt;
+                &lt;input type=&quot;file&quot; name=&quot;img&quot; id=&quot;image&quot; style=&quot;display: none;&quot;&gt;
+
+            &lt;/div&gt;
+            &lt;div class=&quot;mt-4 ml-5 w-full h-fit flex flex-col font-bold&quot;&gt;
+                &lt;p class=&quot;text-2xl&quot;&gt;{{user.firstName|add:&quot; &quot;|add:user.lastName}}&lt;/p&gt;
+                &lt;p class=&quot;text-md&quot;&gt;{{user.stu_id}}&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;mt-10 ml-5 w-full h-fit flex flex-col &quot;&gt;
+                &lt;p&gt;ID: {{user.batch}}&lt;/p&gt;
+                &lt;p&gt;Department: {{user.dept}}&lt;/p&gt;
+                &lt;p&gt;Phone number: {{user.phone_number}}&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;w-4/5 h-full px-20 flex flex-col&quot;&gt;
+            &lt;p class=&quot;text-2xl font-bold bg-gray-100 flex items-center&quot; style=&quot;height: 4vh;&quot;&gt;Your Posts&lt;/p&gt;
+
+            &lt;div class=&quot;overflow-y-auto w-full pr-10&quot; style=&quot;height: 82vh;&quot;&gt;
+                {% for posts in post %}
+                &lt;div class=&quot;w-full h-fit flex flex-col rounded-2xl bg-orange-100 px-8 mt-6 mb-5&quot;&gt;
+                    &lt;div class=&quot;w-full h-20 flex items-center&quot;&gt;
+                        &lt;img src=&quot;&quot; alt=&quot;&quot; class=&quot;w-12 h-12 rounded-full object-cover&quot;&gt;
+                        &lt;div class=&quot;w-2/3 h-fit flex flex-col&quot;&gt;
+                            &lt;h3 class=&quot;ml-2 text-md font-bold&quot;&gt;{{posts.student.firstName|add:&quot; &quot;|add:posts.student.lastName}}&lt;/h3&gt;
+                            &lt;div class=&quot;ml-2 w-full h-fit flex items-center&quot;&gt;
+                                &lt;h3 class=&quot;&quot;&gt;{{posts.student.stu_id}}&lt;/h3&gt;
+                                &lt;div class=&quot;ml-2 w-20 h-fit bg-orange-400 rounded-2xl flex justify-center text-white&quot;&gt;
+
+                                    &lt;p class=&quot;font-bold&quot;&gt;{{posts.category}}&lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;w-full h-fit mt-2 mb-6&quot;&gt;
+                        &lt;p&gt;{{posts.text}}&lt;/p&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class=&quot;w-full flex flex-col&quot; style=&quot;height: 15vh; margin: 0 0 2vh 0;&quot;&gt;
+                        {% for like in likes %}
+                            {% if like.post == posts %}
+                                &lt;div class=&quot;w-1/2 flex mt-2 bg-orange-300 rounded-2xl&quot;&gt;
+                                    {% if like.user.profpic.url != &quot;&quot; %}
+                                        &lt;img src=&quot;{{like.user.profpic.url}}&quot; alt=&quot;&quot; class=&quot;rounded-xl&quot; style=&quot;width: 5vh; height: 5vh;&quot;&gt;
+                                    {% else %}
+                                    &lt;img src=&quot;&quot; alt=&quot;&quot; class=&quot;bg-black rounded-xl&quot; style=&quot;width: 5vh; height: 5vh;&quot;&gt;
+                                    {% endif %}
+
+                                    &lt;div class=&quot;ml-2 w-fit flex flex-col&quot;&gt;
+                                        &lt;p class=&quot;font-bold&quot;&gt;{{like.user.firstName|add:&quot; &quot;|add:like.user.lastName}}&lt;/p&gt;
+
+                                        &lt;p&gt;{{like.comment}}&lt;/p&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            {% endif %}
+                        {% endfor %}
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                {% endfor %}
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
