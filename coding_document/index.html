@@ -126,8 +126,25 @@
 <h2 id="authenticated-system-by-011201145">Authenticated System by 011201145</h2>
 <p>When a user enters our system then he/she must be a valid user. For validating, a user have to register our system. Our register system has <strong>ID Verification</strong> system to authenticate the right user. After authenticating, the user must have to login to our system by his/her user id and password.</p>
 <p><strong>Backend of Validation and Session</strong></p>
-<p>The Django view functions, "validate_user" and "logout," handle user authentication and logout functionality, respectively. 
-In "validate_user" upon receiving a POST request with user credentials, the function retrieves the corresponding student object from the database. If the object exists and the entered password matches, it sets the user's status to active, saves the changes, and creates a session to validate the user. It then redirects the user to the dashboard page.</p>
+<p>The Django view functions "post_sign", "validate_user" and "logout," handle user registration, user authentication and logout functionality, respectively. 
+In "post_sign", using POST method all necessary data are being gethered and pass to database for completing registration.</p>
+<pre><code>def post_sign(req):
+    if req.method == &quot;POST&quot;:
+        s_id = req.POST['mail']
+        fname = req.POST['fname']
+        lname = req.POST['lname']
+        password = req.POST['pass']
+        dept = req.POST['dept']
+        batch = req.POST['batch']
+        phn = req.POST['phn']
+        student = students(stu_id = s_id, firstName = fname, lastName = lname, password = password, batch = batch, dept = dept, phone_number = phn)
+
+        student.save()
+
+        return redirect('login')
+    return render(&quot;signup&quot;)
+</code></pre>
+<p>In "validate_user" upon receiving a POST request with user credentials, the function retrieves the corresponding student object from the database. If the object exists and the entered password matches, it sets the user's status to active, saves the changes, and creates a session to validate the user. It then redirects the user to the dashboard page.</p>
 <pre><code>def validate_user (req) :
     if req.method == &quot;POST&quot;:
         __id = req.POST['email']
@@ -154,7 +171,8 @@ In "validate_user" upon receiving a POST request with user credentials, the func
 
     return redirect('login')
 </code></pre>
-<p><strong>AJAX Implementation</strong></p>
+<p><strong>AJAX Implementation for validating Email and Auto-fill</strong></p>
+<p>If the email is validate correctly then from the email student ID, Batch and Department are being fetched and auto fill the necessary fields during registration.</p>
 <pre><code>&lt;script&gt;
     function __validity() {
         let text__ = document.getElementById('email').value;
@@ -329,7 +347,7 @@ In "validate_user" upon receiving a POST request with user credentials, the func
     notiobj.save()
     return HttpResponse(status=204)
 </code></pre>
-<p><strong>AJAX Implementation</strong></p>
+<p><strong>AJAX Implementation for real-time Like and Comment</strong></p>
 <pre><code>//Upvote
 $(document).ready(function() {
             $('.cmnt').on('click', function() {
@@ -382,7 +400,7 @@ $(document).ready(function() {
 </code></pre>
 <h2 id="post-categorization-by-011201171">Post Categorization by 011201171</h2>
 <p>Here a user can filter out specific categorized posts in thier feed. A user just need to select the category and the feed will than show the result of specific categorized posts with real time manner. </p>
-<p><strong>AJAX Implementation</strong></p>
+<p><strong>AJAX Implementation for Real-time Categorization</strong></p>
 <p>The provided AJAX snippet listens for changes in the element with the ID "change." When a change occurs, it retrieves the selected value from this element. Subsequently, it initiates an AJAX request to the server using the URL specified in the 'url' attribute. The data parameter includes the selected value ('cat') as part of the request.
 Upon successful completion of the AJAX request, the function specified in the 'success' attribute is executed. In this case, it takes the received data and updates the HTML content of the element with the ID "postt" using the <code>$("#postt").html(data)</code> statement. This code snippet is likely part of a feature that dynamically updates content on a webpage based on user interactions.</p>
 <pre><code>$(&quot;#change&quot;).change(function() {
@@ -399,7 +417,7 @@ Upon successful completion of the AJAX request, the function specified in the 's
             });
         }) ;
 </code></pre>
-<p>There is a seperate <strong>.html</strong> template for categorization. This file will be passed on <code>$("#postt").html(data)</code> as data and show the responeses.</p>
+<p>There is a seperate <strong>.html</strong> template for categorization. This file will be passed on <code>$("#postt").html(data)</code> as <strong>data</strong> and show the responeses.</p>
 <pre><code>{% for posts in post %}
 &lt;div
   class=&quot;w-full h-fit flex flex-col rounded-2xl bg-orange-100 px-8 mt-6 mb-5&quot;
@@ -580,7 +598,7 @@ Upon successful completion of the AJAX request, the function specified in the 's
             &lt;/div&gt;
         &lt;/div&gt;
 </code></pre>
-<p><strong>AJAX Implementation</strong></p>
+<p><strong>AJAX Implementation for Updating Chat Contacts and Sending Message</strong></p>
 <p>The below code snippet is providing real time user update. The provided JavaScript code uses the setInterval function to periodically send a GET request to the 'refchat' URL in the Django project. This URL is dynamically generated using the user parameter 'enp'. The received HTML response is then used to update the content of the element with the 'chat' ID on the webpage at one-second intervals. Essentially, this code snippet implements a real-time update mechanism for the chat section on the webpage, refreshing the content every second.</p>
 <pre><code>        setInterval(function() {
             $.ajax({
@@ -593,6 +611,21 @@ Upon successful completion of the AJAX request, the function specified in the 's
             });
         }, 1000);
 </code></pre>
+<pre><code>{% for actib in activ %} 
+{% if actib.stu_id != user.stu_id %}
+&lt;div class=&quot;w-full h-14 rounded-2xl mt-4 flex px-8 bg-orange-300 items-center&quot;&gt;
+  {% if actib.profpic.url != &quot;&quot; %}
+                        &lt;img src=&quot;{{actib.profpic.url}}&quot; alt=&quot;&quot; class=&quot;object-cover rounded-full w-12 h-12&quot; style=&quot;margin-right: 1vh;&quot;&gt;
+                    {% else %}
+                        &lt;img src=&quot;&quot; alt=&quot;&quot; class=&quot;object-cover rounded-full w-12 h-12 bg-black&quot; style=&quot;margin-right: 1vh;&quot;&gt;
+                    {% endif %}
+
+  &lt;h3 class=&quot;text-md font-md ml-3&quot;&gt;{{actib.firstName}}&lt;/h3&gt;
+&lt;/div&gt;
+{% endif %} 
+{% endfor %}
+</code></pre>
+<p><strong>Sending Message Function Using AJAX</strong></p>
 <p>This code snippet provides real time message sending to another user. The provided JavaScript function 'sendd' is triggered when a user sends a message. It retrieves the message content from the 'msgbox' element, which represents a message input box on the webpage. The CSRF token is also obtained to ensure secure communication. The obtained message content and CSRF token are then sent as POST data to the 'sendmsg' URL in the Django project, which is dynamically generated using the 'enp' user parameter. Upon successful completion, a log message is printed to the console, indicating that the message has been sent successfully. Essentially, this code handles the client-side functionality for sending messages in a real-time chat system.</p>
 <pre><code>        let msgbox = document.getElementById('msgg') ;
         function sendd() {
@@ -1056,7 +1089,7 @@ Upon successful completion of the AJAX request, the function specified in the 's
     else:
         return redirect('login')
 </code></pre>
-<p><strong>AJAX implementation in Showing Events details</strong></p>
+<p><strong>AJAX implementation in Showing Events details by 011201195</strong></p>
 <p>The JavaScript function <code>viewdetails</code> is designed to display event details on a web page. When invoked with a specific event identifier (<code>str</code>), it first retrieves the HTML container element with the ID 'details' and sets its display style to "flex," making it visible. Subsequently, an <strong>AJAX</strong> request is made to the server using the URL associated with the 'vdetails' view in the Django application. The event identifier is included as a parameter in the request. Upon successful execution, the response received from the server, containing the details of the specified event, is injected into the HTML container with the ID 'container'. This dynamic loading of event details enables a seamless user experience without requiring a full page reload.</p>
 <pre><code>function viewdetails(str) {
             let eventt = document.getElementById('details') ;
@@ -1200,7 +1233,8 @@ Upon successful completion of the AJAX request, the function specified in the 's
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-</code></pre></div>
+</code></pre>
+<p>This is all about the coding part of our system.</p></div>
             </div>
         </div>
 
